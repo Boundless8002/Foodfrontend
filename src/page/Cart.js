@@ -12,9 +12,7 @@ const Cart = () => {
   const user = useSelector(state => state.user)
   const navigate = useNavigate();
   const completePayment = () => {
-    // {
-    //   Login && toast(`Payment Successful with ₹ ${totalPrice},Your order is placed `)
-    // }
+  
     if (user.email) {
       toast(`Payment Successful with ₹ ${totalPrice},Your order is placed `)
     }
