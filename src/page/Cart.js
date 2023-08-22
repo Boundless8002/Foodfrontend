@@ -3,36 +3,40 @@ import { useSelector } from 'react-redux'
 import CartProduct from '../component/CartProduct'
 import emptycart from "../assest/emptycart.gif"
 import { toast } from 'react-hot-toast'
-import { loadStripe } from '@stripe/stripe-js';
+
 import { useNavigate } from "react-router-dom";
-import Login from './Login'
 
 
 const Cart = () => {
   const user = useSelector(state => state.user)
   const navigate = useNavigate();
+
+
+  let cartItemNumber = useSelector((state => state.product.cartItem))
+  console.log(cartItemNumber)
   const completePayment = () => {
-  
+
     if (user.email) {
       toast(`Payment Successful with ₹ ${totalPrice},Your order is placed `)
+
+
     }
     else {
-      toast("You are not login")
+      toast("You are not login");
       setTimeout(() => {
         navigate("/login")
       }, 1000)
     }
   }
 
-
   const productCardItem = useSelector((state) => state.product.cartItem)
+
 
 
   //  console.log(productCardItem)
   //let result = total. replace(/[^0-9]/g,"");
   const totalPrice = productCardItem.reduce((acc, curr) => acc + parseInt((curr.total).replace(/[^0-9]/g, "")), 0)
   const totalQty = productCardItem.reduce((acc, curr) => acc + parseInt(curr.qty), 0)
-
 
 
 
